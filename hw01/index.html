@@ -1,45 +1,41 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- D3, jquery -->
-<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" charset="utf-8"></script>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" charset="utf-8"></script>
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
 
-<title>作業一</title>
-<!-- https://alexlenail.me/NN-SVG/about.html -->
-<link rel="icon" href="../hw00/favicon.svg"/>
-<style type="text/css">
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap');
+  <title>作業一</title>
+  <link rel="icon" href="../hw00/favicon.svg">
 
-  @font-face {
-    font-family:'CircleFont';
-    src: url(https://circle472.github.io/ct2022s/hw04/CircleFont_v2.woff2); 
-  }
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap');
 
-  table {
+    @font-face {
+      font-family: 'CircleFont';
+      src: url(https://circle472.github.io/ct2022s/hw04/CircleFont_v2.woff2);
+    }
+
+    table {
       border-collapse: collapse;
-      border: 2px solid white; /* rgba(217,140,144,1) */
-      font-size:  16pt;
+      border: 2px solid white;
+      font-size: 16pt;
       margin-left: auto;
       margin-right: auto;
-  }
+    }
 
-  td,
-  th {
+    td,
+    th {
       border: 1px solid white;
       padding: 2px 8px;
-  }
+    }
 
-  .flipswitch
-  {
+    .flipswitch {
       position: relative;
       background: white;
       width: 120px;
@@ -47,209 +43,249 @@
       -webkit-appearance: initial;
       border-radius: 3px;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-      outline:none;
+      outline: none;
       font-size: 14px;
       font-family: Trebuchet, Arial, sans-serif;
       font-weight: bold;
-      cursor:pointer;
-      border:1px solid #ddd;
-  }
-  .flipswitch:after
-  {
-      position:absolute;
-      top:5%;
-      display:block; 
-      line-height:16px;
-      width:45%;
-      height:90%;
-      background:#fff;
-      box-sizing:border-box;
-      text-align:center;
-      transition: all 0.3s ease-in 0s; 
-      color:rgba(159,53,58,1);
-      border:#888 1px solid;
-      border-radius:3px;
-  }
-  .flipswitch:after
-  {
-      left:2%;
+      cursor: pointer;
+      border: 1px solid #ddd;
+    }
+
+    .flipswitch:after {
+      position: absolute;
+      top: 5%;
+      display: block;
+      line-height: 16px;
+      width: 45%;
+      height: 90%;
+      background: #fff;
+      box-sizing: border-box;
+      text-align: center;
+      transition: all 0.3s ease-in 0s;
+      color: rgba(159, 53, 58, 1);
+      border: #888 1px solid;
+      border-radius: 3px;
+      left: 2%;
       content: "未完成";
-  }
-  .flipswitch:checked:after
-  {
-      left:53%;
+    }
+
+    .flipswitch:checked:after {
+      left: 53%;
       content: "完成";
-  }
+    }
 
-  body {
-    background-color: rgb(106, 76, 156); /* #6A4C9C */
-    color: rgb(106, 76, 156);
-    font-family: 'CircleFont', 'Noto Sans JP', serif;
-  }
+    body {
+      background-color: rgb(106, 76, 156);
+      color: rgb(106, 76, 156);
+      font-family: 'CircleFont', 'Noto Sans JP', serif;
+    }
 
-  .container-fluid {
-    width:  90%;
-  }
+    p {
+      font-family: 'LXGW WenKai Mono TC', 'Noto Sans TC', serif;
+    }
 
-  .hw12 {
-    border: 1px solid rgb(159, 53, 58);
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
+    .container-fluid {
+      width: 90%;
+    }
 
-  .twenty {
-    border: 1px solid #f9eced;
-    color: #f9eced;
-    padding: 8px;
-    font-size: 18pt;
-  }
+    .hw12 {
+      border: 1px solid rgb(159, 53, 58);
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
 
-  .twenty a {
-    color:  yellow;
-  }
+    .twenty {
+      border: 1px solid #f9eced;
+      color: #f9eced;
+      padding: 8px;
+      font-size: 18pt;
+    }
 
-  .twenty a:hover {
-    color: #f9eced;
-    font-size:  16pt;
-  }
+    .twenty a {
+      color: yellow;
+    }
 
-  .twenty:hover {
+    .twenty a:hover {
+      color: #f9eced;
+      font-size: 16pt;
+    }
+
+    .twenty:hover {
       box-shadow: 0 0 5px 3px #f9eced;
-      color: cyan; 
-      text-shadow: 0 0 6px #FFFFFF, 0 0 6px #000000;
-  }
+      color: cyan;
+      text-shadow: 0 0 6px #ffffff, 0 0 6px #000000;
+    }
 
-  .toprow {
-    margin-top: 36px;
-  }
+    .toprow {
+      margin-top: 36px;
+    }
 
-  .bottomrow {
-    margin-bottom: 36px;
-  }
-</style>
+    .bottomrow {
+      margin-bottom: 36px;
+    }
+
+    .withborder {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #f9eced;
+    }
+
+    figcaption {
+      margin-bottom: 8px;
+    }
+
+    button {
+      border: 1px solid #f9eced;
+      background: #f9eced;
+      color: rgb(106, 76, 156);
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
+  <div class="container-fluid">
+    <div class="row hw12 toprow">
+      <div class="col twenty"><a href="../hw00/index.html">00</a></div>
+      <div class="col twenty"><a href="../hw01/index.html">01</a></div>
+      <div class="col twenty"><a href="../hw02/index.html">02</a></div>
+      <div class="col twenty"><a href="../hw03/index.html">03</a></div>
+      <div class="col twenty"><a href="../hw04/index.html">04</a></div>
+      <div class="col twenty"><a href="../hw05/index.html">05</a></div>
+      <div class="col twenty"><a href="../hw06/index.html">06</a></div>
+    </div>
 
-<div class="container-fluid">
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        <h1>作業 01</h1>
+      </div>
+    </div>
 
-  <!-- ---------------------------------------------- -->
-  <div class="row hw12 toprow">
-    <div class="col twenty"><a href="../hw00/index.html">00</a></div>
-    <div class="col twenty"><a href="../hw01/index.html">01</a></div>
-    <div class="col twenty"><a href="../hw02/index.html">02</a></div>
-    <div class="col twenty"><a href="../hw03/index.html">03</a></div>
-    <div class="col twenty"><a href="../hw04/index.html">04</a></div>
-    <div class="col twenty"><a href="../hw05/index.html">05</a></div>
-    <div class="col twenty"><a href="../hw06/index.html">06</a></div>
-  </div>
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        這次作業讓我重新體會到手寫文字和電腦打字完全不同的感受。平常大多數時間都是用鍵盤輸入，很少有機會靜下心來一筆一畫地寫字，所以一開始面對這份作業時，其實覺得有點麻煩，也擔心自己沒有耐心完成。不過真的開始寫之後，反而慢慢進入狀況。每一個字的結構、筆順和間距，都必須仔細注意，不能像打字一樣按下按鍵就結束。這種過程雖然花時間，但也讓我更專注，心情變得平靜許多。
 
-  <!-- ------------------------------------------------>
-  <div class="row hw12">
-    <div class="col-md-12 twenty">
-      <h1>作業 01</h1>
+在抄寫千字文、長恨歌、洛神賦、詩經，以及部首、英文、標點和姓名的過程中，我感受到不同內容帶來的節奏差異。古文比較講究字形和整體排列，英文與標點則需要注意另外一種規律。寫久了之後，手會痠，也會發現自己的字其實沒有想像中穩定，但這也讓我知道平常真的太少練字。這份作業不只是單純完成指定內容，更像是一種讓自己放慢速度、重新整理思緒的練習。雖然過程有點累，但完成後很有成就感，也讓我更能理解過去人們透過書寫培養耐心與專注的原因。
+      </div>
+    </div>
+
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        <span>倉庫位置連結：</span>
+        <br>
+        <button type="button" onclick="location.href='https://github.com/gay10/ai2026s/tree/main/hw01';">
+          前往 hw01 倉庫
+        </button>
+      </div>
+    </div>
+
+    <div class="row hw12">
+      <div class="col-md-12 twenty">
+        <table>
+          <tr>
+            <th>總分</th>
+            <th>完成後打勾</th>
+            <th>配分</th>
+            <th>分項描述</th>
+          </tr>
+          <tr>
+            <td rowspan="4" id="myTotal">10</td>
+            <td><input type="checkbox" class="flipswitch" id="myCheckbox1" checked></td>
+            <td id="m1">4</td>
+            <td>Simple baseline</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="flipswitch" id="myCheckbox2" checked></td>
+            <td id="m2">4</td>
+            <td>Medium baseline</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="flipswitch" id="myCheckbox3" checked></td>
+            <td id="m3">2</td>
+            <td>Strong baseline</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" class="flipswitch" id="myCheckbox4"></td>
+            <td id="m4">-10</td>
+            <td>沒有寫100字心得</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="row hw12 bottomrow">
+      <div class="col-md-3 twenty">
+        <figcaption>1. 千字文 第1頁</figcaption>
+        <img class="withborder" src="./千字文1.jpg" alt="千字文 第1頁">
+      </div>
+      <div class="col-md-3 twenty">
+        <figcaption>2. 長恨歌 第1頁</figcaption>
+        <img class="withborder" src="./長恨歌1.jpg" alt="長恨歌 第1頁">
+      </div>
+      <div class="col-md-3 twenty">
+        <figcaption>3. 洛神賦 第1頁</figcaption>
+        <img class="withborder" src="./洛神賦1.jpg" alt="洛神賦 第1頁">
+      </div>
+      <div class="col-md-3 twenty">
+        <figcaption>4. 詩經 第1頁</figcaption>
+        <img class="withborder" src="./詩經1.jpg" alt="詩經 第1頁">
+      </div>
+      <div class="col-md-3 twenty">
+        <figcaption>5. 部首 第1頁</figcaption>
+        <img class="withborder" src="./部首1.jpg" alt="部首 第1頁">
+      </div>
+      <div class="col-md-3 twenty">
+        <figcaption>6. 英文 第1頁</figcaption>
+        <img class="withborder" src="./英文1.jpg" alt="英文 第1頁">
+      </div>
+      <div class="col-md-3 twenty">
+        <figcaption>7. 標點符號 第1頁</figcaption>
+        <img class="withborder" src="./標點符號1.jpg" alt="標點符號 第1頁">
+      </div>
+      <div class="col-md-3 twenty">
+        <figcaption>8. 姓名 第1頁</figcaption>
+        <img class="withborder" src="./姓名1.jpg" alt="姓名 第1頁">
+      </div>
     </div>
   </div>
 
-  <!-- ------------------------------------------------>
-  <div class="row hw12">
-    <div class="col-md-12 twenty">
-      心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。
-    </div>
-  </div>
+  <script>
+    $(function() {
+      var f = function() {
+        $(this).next().text($(this).is(':checked') ? '做完' : '未做完');
+      };
+      $('input').change(f).trigger('change');
+    });
 
-  <!-- ------------------------------------------------>
-  <div class="row hw12">
-    <div class="col-md-12 twenty">
-      <table>
-        <tr>
-          <th>總分</th>
-          <th>完成後打勾</th>
-          <th>配分</th>
-          <th>分項描述</th>
-        </tr>
-        <tr>
-          <td rowspan="4" id="myTotal"></td>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox1"></td>
-          <td id='m1'>4</td>
-          <td>Simple baseline - 描述</td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox2"></td>
-          <td id='m2'>4</td>
-          <td>Medium baseline - 描述</td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox3"></td>
-          <td id='m3'>2</td>
-          <td>Strong baseline - 描述</td>
-        </tr>
-        <tr>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox4" checked></td>
-          <td id='m4'>-10</td>
-          <td>沒有寫100字心得</td>
-        </tr>
+    d3.select("#myCheckbox1").on("change", update);
+    d3.select("#myCheckbox2").on("change", update);
+    d3.select("#myCheckbox3").on("change", update);
+    d3.select("#myCheckbox4").on("change", update);
 
-      </table>
-    </div>
-  </div>
+    update();
 
-  <!-- ------------------------------------------------>
-  <div class="row hw12 bottomrow">
-    <div class="col-md-12 twenty">
-      <video id="video1" style="width:100%;max-width:100%;" controls="">
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      </video>
-    </div>
-  </div>
+    function update() {
+      var score = 0;
 
-  <!-- ------------------------------------------------>
+      if (d3.select("#myCheckbox1").property("checked")) {
+        score += parseInt(d3.select("#m1").html(), 10);
+      }
 
-  <!-- ------------------------------------------------>
+      if (d3.select("#myCheckbox2").property("checked")) {
+        score += parseInt(d3.select("#m2").html(), 10);
+      }
 
+      if (d3.select("#myCheckbox3").property("checked")) {
+        score += parseInt(d3.select("#m3").html(), 10);
+      }
 
-<script>
-  $(function() {
-    var f = function() {
-      $(this).next().text($(this).is(':checked') ? '做完' : '未做完');
-    };
-    $('input').change(f).trigger('change');
-  });
+      if (d3.select("#myCheckbox4").property("checked")) {
+        score += parseInt(d3.select("#m4").html(), 10);
+      }
 
-  d3.select("#myCheckbox1").on("change",update);
-  d3.select("#myCheckbox2").on("change",update);
-  d3.select("#myCheckbox3").on("change",update);
-  d3.select("#myCheckbox4").on("change",update);
-  // d3.select("#myCheckbox5").on("change",update);
-  // d3.select("#myCheckbox6").on("change",update);
-  // d3.select("#myCheckbox7").on("change",update);
-
-  update();
-  
-  function update(){
-
-    var score = 0;
-
-    if (d3.select("#myCheckbox1").property("checked")){
-      score += parseInt(d3.select('#m1').html());
+      d3.select("#myTotal").html(score);
     }
-
-    if (d3.select("#myCheckbox2").property("checked")){
-      score += parseInt(d3.select('#m2').html());   
-    }
-
-    if (d3.select("#myCheckbox3").property("checked")){
-      score += parseInt(d3.select('#m3').html());   
-    }
-
-    if (d3.select("#myCheckbox4").property("checked")){
-      score += parseInt(d3.select('#m4').html());   
-    }
-
-
-    d3.select("#myTotal").html(score);    
-  }
-</script>
-
+  </script>
 </body>
 </html>
-
